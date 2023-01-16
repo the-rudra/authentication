@@ -22,8 +22,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+const pass = process.env.PASSWORD;
 mongoose.set('strictQuery', true);
-mongoose.connect("mongodb://127.0.0.1:27017/userDB");
+mongoose.connect("mongodb+srv://admin-rudra:" + pass + "@cluster0.fsn0ojs.mongodb.net/userDB");
 
 const userSchema = mongoose.Schema({
     email: String,
@@ -153,6 +154,6 @@ app.post('/submit', function(req, res){
 });
 
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log('listening on port 3000');
 });
